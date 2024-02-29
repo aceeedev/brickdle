@@ -30,6 +30,10 @@ class MyApp extends StatelessWidget {
               List<List<dynamic>> csvData =
                   const CsvToListConverter().convert(fileData);
 
+              csvData = csvData
+                  .where((element) => element[4] is int && element[4] >= 500)
+                  .toList();
+
               final numOfLegos = csvData.length - 2;
               final selectedLego = csvData[Random().nextInt(numOfLegos) + 1];
 
@@ -79,28 +83,39 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.network(
-                  'https://images.brickset.com/sets/images/${widget.selectedLego[0]}.jpg'),
+                  'https://images.brickset.com/sets/images/${widget.selectedLego[0]}.jpg',
+                  fit: BoxFit.fitWidth,
+                  height: 500),
               TextFormField(
                 onFieldSubmitted: (value) =>
-                    setState(() => guesses.add(int.parse(value))),
+                    setState(() => guesses.insert(0, int.parse(value))),
               ),
               Expanded(
-                child: ListView.builder(
-                    itemCount: guesses.length,
-                    itemBuilder: (context, index) {
-                      int guess = guesses[index];
-                      int correctValue = widget.selectedLego[4];
+                child: Center(
+                  child: ListView.builder(
+                      reverse: true,
+                      itemCount: guesses.length,
+                      itemBuilder: (context, index) {
+                        int guess = guesses[index];
+                        int correctValue = widget.selectedLego[4];
 
-                      IconData icon = guess == correctValue
-                          ? Icons.check
-                          : guess > correctValue
-                              ? Icons.arrow_downward
-                              : Icons.arrow_upward;
+                        IconData icon = guess == correctValue
+                            ? Icons.check
+                            : guess > correctValue
+                                ? Icons.arrow_downward
+                                : Icons.arrow_upward;
 
-                      return Card(
-                          child: Row(
-                              children: [Text(guess.toString()), Icon(icon)]));
-                    }),
+                        return Container(
+                          width: 500,
+                          height: 40,
+                          child: Card(
+                              child: Row(children: [
+                            Text(guess.toString()),
+                            Icon(icon)
+                          ])),
+                        );
+                      }),
+                ),
               )
             ],
           ),
