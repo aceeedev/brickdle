@@ -30,6 +30,8 @@ class _HomePageState extends State<HomePage> {
           const Text(
             'Daily Brickdle #420',
             style: Styles.titleTextStyle,
+            textAlign: TextAlign.center,
+            softWrap: true,
           ),
           Image.network(currentLegoSet.imageUrl,
               fit: BoxFit.fitWidth, height: 300),
@@ -40,9 +42,13 @@ class _HomePageState extends State<HomePage> {
                   Icons.menu,
                   size: Styles.iconButtonSize,
                 )),
-            Text(
-              '${currentLegoSet.name} ${currentLegoSet.hasSubtheme ? '(${currentLegoSet.subtheme})' : ''}',
-              style: Styles.subtitleTextStyle,
+            Flexible(
+              child: Text(
+                '${currentLegoSet.name} ${currentLegoSet.hasSubtheme ? '(${currentLegoSet.subtheme})' : ''}',
+                style: Styles.subtitleTextStyle,
+                textAlign: TextAlign.center,
+                softWrap: true,
+              ),
             ),
             IconButton(
                 onPressed: () {},
