@@ -41,13 +41,13 @@ class App extends StatelessWidget {
               context.read<GameProvider>().startGame();
 
               return MaterialApp(
-                title: 'Flutter Demo',
+                title: 'Brickdle',
                 theme: ThemeData(
-                  colorScheme:
-                      ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                  fontFamily: 'Archivo Black',
                   useMaterial3: true,
                 ),
-                home: HomePage(),
+                debugShowCheckedModeBanner: false,
+                home: const HomePage(),
               );
             }
           }

@@ -6,6 +6,9 @@ class LegoSet {
   final int pieces;
   final double price;
   final int year;
+  late String imageUrl;
+
+  bool get hasSubtheme => subtheme != '';
 
   LegoSet(
       {required this.number,
@@ -14,7 +17,9 @@ class LegoSet {
       required this.name,
       required this.pieces,
       required this.price,
-      required this.year});
+      required this.year}) {
+    imageUrl = 'https://images.brickset.com/sets/images/$number.jpg';
+  }
 
   factory LegoSet.fromList(List<dynamic> list) {
     return LegoSet(

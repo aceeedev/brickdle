@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:legodle_app/styles.dart';
 import 'package:legodle_app/providers/game_provider.dart';
 import 'package:legodle_app/models/lego_set.dart';
+import 'package:legodle_app/widgets/guess_card_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,20 +23,32 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text('Daily Brickdle #420'),
-          Image.network(
-              'https://images.brickset.com/sets/images/${currentLegoSet.number}.jpg',
-              fit: BoxFit.fitWidth,
-              height: 300),
+          const Text(
+            'Daily Brickdle #420',
+            style: Styles.titleTextStyle,
+          ),
+          Image.network(currentLegoSet.imageUrl,
+              fit: BoxFit.fitWidth, height: 300),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
-            Text('${currentLegoSet.name} (${currentLegoSet.subtheme})'),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.share))
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.menu,
+                  size: Styles.iconButtonSize,
+                )),
+            Text(
+              '${currentLegoSet.name} ${currentLegoSet.hasSubtheme ? '(${currentLegoSet.subtheme})' : ''}',
+              style: Styles.subtitleTextStyle,
+            ),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.share, size: Styles.iconButtonSize))
           ]),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
-              width: 150,
+              width: 400,
+              height: 75,
               child: TextFormField(
                 onFieldSubmitted: (value) {
                   final valueAsInt = int.tryParse(value);
@@ -42,35 +56,30 @@ class _HomePageState extends State<HomePage> {
                     context.read<GameProvider>().addGuess(valueAsInt);
                   }
                 },
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter your guess',
-                ),
+                textInputAction: TextInputAction.none,
+                textAlign: TextAlign.center,
+                style: Styles.scoreTextStyle,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    hintText: 'Enter your guess',
+                    hintStyle: Styles.subtitleTextStyle,
+                    filled: true,
+                    fillColor: const Color(0xFFE5E5E5)),
               ),
             ),
           ),
           Expanded(
             child: SizedBox(
-              width: 100,
+              width: 400,
+              height: 60,
               child: ListView.builder(
                   itemCount: guesses.length,
                   itemBuilder: (context, index) {
                     int guess = guesses[index];
-                    int correctValue = currentLegoSet.pieces;
 
-                    IconData icon = guess == correctValue
-                        ? Icons.check
-                        : guess > correctValue
-                            ? Icons.arrow_downward
-                            : Icons.arrow_upward;
-
-                    return SizedBox(
-                      child: Row(children: [
-                        Icon(icon),
-                        Text(guess.toString()),
-                        Icon(icon)
-                      ]),
-                    );
+                    return GuessCard(guess: guess);
                   }),
             ),
           )

@@ -17,10 +17,7 @@ class GameProvider with ChangeNotifier {
 
   void startGame() {
     _currentLegoSet = legoSets[Random().nextInt(legoSets.length)];
-    print(_currentLegoSet.name);
     _guesses = [];
-
-    //notifyListeners();
   }
 
   void addGuess(int value) {
