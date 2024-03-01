@@ -64,14 +64,15 @@ class _HomePageState extends State<HomePage> {
                 textAlign: TextAlign.center,
                 style: Styles.scoreTextStyle,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: 'How many bricks?',
-                    hintStyle: Styles.subtitleTextStyle,
-                    filled: true,
-                    fillColor: const Color(0x0D000000),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  hintText: 'How many bricks?',
+                  hintStyle: Styles.subtitleTextStyle,
+                  filled: true,
+                  fillColor: const Color(0x0D000000),
+                ),
               ),
             ),
           ),
