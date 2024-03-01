@@ -17,51 +17,65 @@ class _HomePageState extends State<HomePage> {
     List<int> guesses = context.watch<GameProvider>().guesses;
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text('Guess the number of lego pieces!'),
-        ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.network(
-                  'https://images.brickset.com/sets/images/${currentLegoSet.number}.jpg',
-                  fit: BoxFit.fitWidth,
-                  height: 500),
-              TextFormField(
-                onFieldSubmitted: (value) =>
-                    context.read<GameProvider>().addGuess(int.parse(value)),
-              ),
-              Expanded(
-                child: Center(
-                  child: ListView.builder(
-                      reverse: true,
-                      itemCount: guesses.length,
-                      itemBuilder: (context, index) {
-                        int guess = guesses[index];
-                        int correctValue = currentLegoSet.pieces;
-
-                        IconData icon = guess == correctValue
-                            ? Icons.check
-                            : guess > correctValue
-                                ? Icons.arrow_downward
-                                : Icons.arrow_upward;
-
-                        return Container(
-                          width: 500,
-                          height: 40,
-                          child: Card(
-                              child: Row(children: [
-                            Text(guess.toString()),
-                            Icon(icon)
-                          ])),
-                        );
-                      }),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const Text('Daily Brickdle #420'),
+          Image.network(
+              'https://images.brickset.com/sets/images/${currentLegoSet.number}.jpg',
+              fit: BoxFit.fitWidth,
+              height: 300),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
+            Text('${currentLegoSet.name} (${currentLegoSet.subtheme})'),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.share))
+          ]),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: 150,
+              child: TextFormField(
+                onFieldSubmitted: (value) {
+                  final valueAsInt = int.tryParse(value);
+                  if (valueAsInt != null) {
+                    context.read<GameProvider>().addGuess(valueAsInt);
+                  }
+                },
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your guess',
                 ),
-              )
-            ],
+              ),
+            ),
           ),
-        ));
+          Expanded(
+            child: SizedBox(
+              width: 100,
+              child: ListView.builder(
+                  itemCount: guesses.length,
+                  itemBuilder: (context, index) {
+                    int guess = guesses[index];
+                    int correctValue = currentLegoSet.pieces;
+
+                    IconData icon = guess == correctValue
+                        ? Icons.check
+                        : guess > correctValue
+                            ? Icons.arrow_downward
+                            : Icons.arrow_upward;
+
+                    return SizedBox(
+                      child: Row(children: [
+                        Icon(icon),
+                        Text(guess.toString()),
+                        Icon(icon)
+                      ]),
+                    );
+                  }),
+            ),
+          )
+        ],
+      ),
+    ));
   }
 }
