@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
               width: 400,
-              height: 75,
+              height: 60,
               child: TextFormField(
                 onFieldSubmitted: (value) {
                   final valueAsInt = int.tryParse(value);
@@ -65,12 +65,13 @@ class _HomePageState extends State<HomePage> {
                 style: Styles.scoreTextStyle,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide.none,
                     ),
-                    hintText: 'Enter your guess',
+                    hintText: 'How many bricks?',
                     hintStyle: Styles.subtitleTextStyle,
                     filled: true,
-                    fillColor: const Color(0xFFE5E5E5)),
+                    fillColor: const Color(0x0D000000),
               ),
             ),
           ),
