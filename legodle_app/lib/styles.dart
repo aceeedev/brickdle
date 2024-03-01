@@ -8,9 +8,9 @@ class Styles {
   static const Color distantColor = Color(0xFFFB5A5A);
 
   // font sizes:
-  static const double _titleFontSize = 48;
+  static const double _titleFontSize = 36;
   static const double _subtitleFontSize = 24;
-  static const double _scoreFontSize = 24;
+  static const double _scoreFontSize = 28;
 
   // text styles:
   static const TextStyle titleTextStyle = TextStyle(fontSize: _titleFontSize);
