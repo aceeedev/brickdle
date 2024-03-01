@@ -1,8 +1,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:provider/provider.dart';
 import 'package:csv/csv.dart';
 import 'package:legodle_app/pages/home_page.dart';
+import 'package:legodle_app/providers/game_provider.dart';
+import 'package:legodle_app/models/lego_set.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -23,16 +26,19 @@ class App extends StatelessWidget {
             } else if (snapshot.hasData) {
               String fileData = snapshot.data!;
 
-              // format: [Number, Theme, Subtheme, Set name, Pieces, RRP (USD)]
+              // format: [Number, Theme, Subtheme, Set name, Pieces, RRP (USD), Year]
               List<List<dynamic>> csvData =
                   const CsvToListConverter().convert(fileData);
+              csvData.removeAt(0); // remove header
 
-              csvData = csvData
-                  .where((element) => element[4] is int && element[4] >= 500)
-                  .toList();
+              List<LegoSet> legoSets =
+                  csvData.map((e) => LegoSet.fromList(e)).toList();
 
-              final numOfLegos = csvData.length - 2;
-              final selectedLego = csvData[Random().nextInt(numOfLegos) + 1];
+              legoSets =
+                  legoSets.where((element) => element.pieces >= 500).toList();
+
+              context.read<GameProvider>().setLegoSets(legoSets);
+              context.read<GameProvider>().startGame();
 
               return MaterialApp(
                 title: 'Flutter Demo',
@@ -41,7 +47,7 @@ class App extends StatelessWidget {
                       ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                   useMaterial3: true,
                 ),
-                home: HomePage(selectedLego: selectedLego),
+                home: HomePage(),
               );
             }
           }

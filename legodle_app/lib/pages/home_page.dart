@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:legodle_app/providers/game_provider.dart';
+import 'package:legodle_app/models/lego_set.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.selectedLego});
-
-  final List<dynamic> selectedLego;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  List<int> guesses = [];
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    LegoSet currentLegoSet = context.watch<GameProvider>().currentLegoSet;
+    List<int> guesses = context.watch<GameProvider>().guesses;
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -29,12 +26,12 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.network(
-                  'https://images.brickset.com/sets/images/${widget.selectedLego[0]}.jpg',
+                  'https://images.brickset.com/sets/images/${currentLegoSet.number}.jpg',
                   fit: BoxFit.fitWidth,
                   height: 500),
               TextFormField(
                 onFieldSubmitted: (value) =>
-                    setState(() => guesses.insert(0, int.parse(value))),
+                    context.read<GameProvider>().addGuess(int.parse(value)),
               ),
               Expanded(
                 child: Center(
@@ -43,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                       itemCount: guesses.length,
                       itemBuilder: (context, index) {
                         int guess = guesses[index];
-                        int correctValue = widget.selectedLego[4];
+                        int correctValue = currentLegoSet.pieces;
 
                         IconData icon = guess == correctValue
                             ? Icons.check
