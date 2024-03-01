@@ -26,9 +26,9 @@ class GuessCard extends StatelessWidget {
         icon = Icons.arrow_upward;
       }
 
-      if ((distanceAway).abs() < correctValue * 0.1) {
+      if ((distanceAway).abs() < correctValue * 0.3) {
         cardColor = Styles.closeColor;
-      } else if ((distanceAway).abs() < correctValue * 0.3) {
+      } else if ((distanceAway).abs() < correctValue * 0.6) {
         cardColor = Styles.farColor;
       } else {
         cardColor = Styles.distantColor;
@@ -37,22 +37,26 @@ class GuessCard extends StatelessWidget {
 
     final Widget directionIcon = Icon(
       icon,
-      color: Colors.black.withOpacity(0.50),
+      color: Colors.black.withOpacity(0.25),
+      size: 35,
     );
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
+      padding: const EdgeInsets.only(bottom: 5.0),
       child: SizedBox(
         width: 400,
-        height: 60,
+        height: 45,
         child: Container(
           color: cardColor,
-          constraints: const BoxConstraints(maxWidth: 400, maxHeight: 60),
+          constraints: const BoxConstraints(maxWidth: 400, maxHeight: 45),
+          padding: const EdgeInsets.only(right: 15.0),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                directionIcon,
+                // directionIcon,
+                Text('Filler',
+                    style: TextStyle(color: Colors.black.withOpacity(0))),
                 Text(
                   guess.toString(),
                   style: Styles.scoreTextStyle,
