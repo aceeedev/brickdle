@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:legodle_app/styles.dart';
 import 'package:legodle_app/providers/game_provider.dart';
 import 'package:legodle_app/models/lego_set.dart';
+import 'package:legodle_app/models/guess.dart';
 import 'package:legodle_app/widgets/guess_card_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,14 +14,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> buildGuessCards(List<int> guesses) {
+  final TextEditingController guessTextEditingController =
+      TextEditingController();
+
+  List<Widget> buildGuessCards(List<Guess> guesses) {
     return guesses.map((e) => GuessCard(guess: e)).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     LegoSet currentLegoSet = context.watch<GameProvider>().currentLegoSet;
-    List<int> guesses = context.watch<GameProvider>().guesses;
+    List<Guess> guesses = context.watch<GameProvider>().guesses;
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -60,10 +64,13 @@ class _HomePageState extends State<HomePage> {
               width: 400,
               height: 60,
               child: TextFormField(
+                controller: guessTextEditingController,
                 onFieldSubmitted: (value) {
                   final valueAsInt = int.tryParse(value);
                   if (valueAsInt != null) {
                     context.read<GameProvider>().addGuess(valueAsInt);
+
+                    guessTextEditingController.clear();
                   }
                 },
                 textInputAction: TextInputAction.none,
