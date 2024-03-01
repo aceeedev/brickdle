@@ -39,6 +39,12 @@ class _HomePageState extends State<HomePage> {
           ),
           Image.network(currentLegoSet.imageUrl,
               fit: BoxFit.fitWidth, height: 300),
+          Text(
+            '${currentLegoSet.name} ${currentLegoSet.hasSubtheme ? '(${currentLegoSet.subtheme})' : ''}',
+            style: Styles.subtitleTextStyle,
+            textAlign: TextAlign.center,
+            softWrap: true,
+          ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             IconButton(
                 onPressed: () {},
@@ -46,13 +52,9 @@ class _HomePageState extends State<HomePage> {
                   Icons.menu,
                   size: Styles.iconButtonSize,
                 )),
-            Flexible(
-              child: Text(
-                '${currentLegoSet.name} ${currentLegoSet.hasSubtheme ? '(${currentLegoSet.subtheme})' : ''}',
-                style: Styles.subtitleTextStyle,
-                textAlign: TextAlign.center,
-                softWrap: true,
-              ),
+            Text(
+              context.watch<GameProvider>().numOfGuesses.toString(),
+              style: Styles.subtitleTextStyle,
             ),
             IconButton(
                 onPressed: () {},
@@ -63,30 +65,37 @@ class _HomePageState extends State<HomePage> {
             child: SizedBox(
               width: 400,
               height: 60,
-              child: TextFormField(
-                controller: guessTextEditingController,
-                onFieldSubmitted: (value) {
-                  final valueAsInt = int.tryParse(value);
-                  if (valueAsInt != null) {
-                    context.read<GameProvider>().addGuess(valueAsInt);
+              child: context.watch<GameProvider>().hasWon
+                  ? const Text(
+                      '🎉 You won!! 🎉',
+                      style: Styles.subtitleTextStyle,
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                    )
+                  : TextFormField(
+                      controller: guessTextEditingController,
+                      onFieldSubmitted: (value) {
+                        final valueAsInt = int.tryParse(value);
+                        if (valueAsInt != null) {
+                          context.read<GameProvider>().addGuess(valueAsInt);
 
-                    guessTextEditingController.clear();
-                  }
-                },
-                textInputAction: TextInputAction.none,
-                textAlign: TextAlign.center,
-                style: Styles.scoreTextStyle,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: 'How many bricks?',
-                  hintStyle: Styles.subtitleTextStyle,
-                  filled: true,
-                  fillColor: const Color(0x0D000000),
-                ),
-              ),
+                          guessTextEditingController.clear();
+                        }
+                      },
+                      textInputAction: TextInputAction.none,
+                      textAlign: TextAlign.center,
+                      style: Styles.scoreTextStyle,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: 'How many bricks?',
+                        hintStyle: Styles.subtitleTextStyle,
+                        filled: true,
+                        fillColor: const Color(0x0D000000),
+                      ),
+                    ),
             ),
           ),
           ...buildGuessCards(guesses),
