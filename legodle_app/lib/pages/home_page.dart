@@ -13,13 +13,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Widget> buildGuessCards(List<int> guesses) {
+    return guesses.map((e) => GuessCard(guess: e)).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     LegoSet currentLegoSet = context.watch<GameProvider>().currentLegoSet;
     List<int> guesses = context.watch<GameProvider>().guesses;
 
     return Scaffold(
-        body: Center(
+        body: SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -70,19 +74,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Expanded(
-            child: SizedBox(
-              width: 400,
-              height: 60,
-              child: ListView.builder(
-                  itemCount: guesses.length,
-                  itemBuilder: (context, index) {
-                    int guess = guesses[index];
-
-                    return GuessCard(guess: guess);
-                  }),
-            ),
-          )
+          ...buildGuessCards(guesses),
         ],
       ),
     ));

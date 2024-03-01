@@ -42,20 +42,24 @@ class GuessCard extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
-      child: Container(
-        color: cardColor,
-        constraints: const BoxConstraints(maxWidth: 400, maxHeight: 60),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              directionIcon,
-              Text(
-                guess.toString(),
-                style: Styles.scoreTextStyle,
-              ),
-              directionIcon,
-            ]),
+      child: SizedBox(
+        width: 400,
+        height: 60,
+        child: Container(
+          color: cardColor,
+          constraints: const BoxConstraints(maxWidth: 400, maxHeight: 60),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                directionIcon,
+                Text(
+                  guess.toString(),
+                  style: Styles.scoreTextStyle,
+                ),
+                directionIcon,
+              ]),
+        ),
       ),
     );
   }
