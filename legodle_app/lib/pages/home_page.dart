@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 )),
             Text(
               context.watch<GameProvider>().numOfGuesses.toString(),
-              style: Styles(context: context).scoreTextStyle,
+              style: Styles(context: context).numberTextStyle,
             ),
             IconButton(
               onPressed: () {},
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                       },
                       textInputAction: TextInputAction.none,
                       textAlign: TextAlign.center,
-                      style: Styles(context: context).scoreTextStyle,
+                      style: Styles(context: context).numberTextStyle,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),

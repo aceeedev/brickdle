@@ -28,7 +28,7 @@ class GuessCard extends StatelessWidget {
                     style: TextStyle(color: Colors.black.withOpacity(0))),
                 Text(
                   guess.toString(),
-                  style: Styles(context: context).scoreTextStyle,
+                  style: Styles(context: context).guessTextStyle,
                 ),
                 Icon(
                   guess.icon,
