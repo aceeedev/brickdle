@@ -10,8 +10,8 @@ class Guess {
   late IconData icon;
 
   // color settings:
-  static const double _yellowCutoff = 0.3;
-  static const double _orangeCutoff = 0.6;
+  static const double _yellowCutoff = 0.1;
+  static const double _orangeCutoff = 0.25;
 
   Guess({required this.value, required correctValue}) {
     _correctValue = correctValue;
