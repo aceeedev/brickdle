@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:legodle_app/styles.dart';
+import 'package:legodle_app/Styles.dart';
 import 'package:legodle_app/providers/game_provider.dart';
 import 'package:legodle_app/models/lego_set.dart';
 import 'package:legodle_app/models/guess.dart';
@@ -31,9 +31,9 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text(
+          Text(
             'Daily Brickdle #420',
-            style: Styles.titleTextStyle,
+            style: Styles(context: context).titleTextStyle,
             textAlign: TextAlign.center,
             softWrap: true,
           ),
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
               fit: BoxFit.fitWidth, height: 300),
           Text(
             '${currentLegoSet.name} ${currentLegoSet.hasSubtheme ? '(${currentLegoSet.subtheme})' : ''}',
-            style: Styles.subtitleTextStyle,
+            style: Styles(context: context).subtitleTextStyle,
             textAlign: TextAlign.center,
             softWrap: true,
           ),
@@ -54,11 +54,12 @@ class _HomePageState extends State<HomePage> {
                 )),
             Text(
               context.watch<GameProvider>().numOfGuesses.toString(),
-              style: Styles.subtitleTextStyle,
+              style: Styles(context: context).subtitleTextStyle,
             ),
             IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.share, size: Styles.iconButtonSize))
+              onPressed: () {},
+              icon: const Icon(Icons.share, size: Styles.iconButtonSize),
+            )
           ]),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -66,9 +67,9 @@ class _HomePageState extends State<HomePage> {
               width: 400,
               height: 60,
               child: context.watch<GameProvider>().hasWon
-                  ? const Text(
+                  ? Text(
                       '🎉 You won!! 🎉',
-                      style: Styles.subtitleTextStyle,
+                      style: Styles(context: context).subtitleTextStyle,
                       textAlign: TextAlign.center,
                       softWrap: true,
                     )
@@ -84,14 +85,14 @@ class _HomePageState extends State<HomePage> {
                       },
                       textInputAction: TextInputAction.none,
                       textAlign: TextAlign.center,
-                      style: Styles.scoreTextStyle,
+                      style: Styles(context: context).scoreTextStyle,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),
                           borderSide: BorderSide.none,
                         ),
                         hintText: 'How many bricks?',
-                        hintStyle: Styles.subtitleTextStyle,
+                        hintStyle: Styles(context: context).subtitleTextStyle,
                         filled: true,
                         fillColor: const Color(0x0D000000),
                       ),
