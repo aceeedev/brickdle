@@ -14,11 +14,11 @@ class GuessCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5.0),
       child: SizedBox(
-        width: 400,
+        width: Styles(context: context).cardWidth,
         height: 45,
         child: Container(
           color: guess.color,
-          constraints: const BoxConstraints(maxWidth: 400, maxHeight: 45),
+          // constraints: const BoxConstraints(maxWidth: 400, maxHeight: 15),
           padding: const EdgeInsets.only(right: 15.0),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

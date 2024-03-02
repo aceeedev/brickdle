@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 )),
             Text(
               context.watch<GameProvider>().numOfGuesses.toString(),
-              style: Styles(context: context).subtitleTextStyle,
+              style: Styles(context: context).scoreTextStyle,
             ),
             IconButton(
               onPressed: () {},
@@ -64,12 +64,13 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
-              width: 400,
-              height: 60,
+              width: Styles(context: context).cardWidth,
+              // height: MediaQuery.of(context).size.width > 768 ? 60 : 40,
+              height: Styles(context: context).inputCardHeight,
               child: context.watch<GameProvider>().hasWon
                   ? Text(
                       '🎉 You won!! 🎉',
-                      style: Styles(context: context).subtitleTextStyle,
+                      style: Styles(context: context).titleTextStyle,
                       textAlign: TextAlign.center,
                       softWrap: true,
                     )

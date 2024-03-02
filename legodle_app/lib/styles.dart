@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class Styles {
   Styles({required BuildContext context}) {
-    if (MediaQuery.of(context).size.width > 768) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth > 768) {
       _titleFontSize = 36;
       _subtitleFontSize = 24;
       _scoreFontSize = 28;
+      inputCardHeight = 60;
     } else {
-      _titleFontSize = 18;
-      _subtitleFontSize = 14;
-      _scoreFontSize = 16;
+      _titleFontSize = 28;
+      _subtitleFontSize = 16;
+      _scoreFontSize = 24;
+      inputCardHeight = 45;
     }
+    cardWidth = min(screenWidth * 0.85, 400);
   }
 
   // font sizes:
   late final double _titleFontSize;
   late final double _subtitleFontSize;
   late final double _scoreFontSize;
+
+  // cards:
+  late final double cardWidth;
+  late final double inputCardHeight;
 
   // colors:
   static const Color green = Color(0xFF11E440);
