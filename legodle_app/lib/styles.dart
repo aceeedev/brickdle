@@ -19,10 +19,10 @@ class Styles {
   late final double _scoreFontSize;
 
   // colors:
-  static const Color correctColor = Color(0xFF11E440);
-  static const Color closeColor = Color(0xFFF6F950);
-  static const Color farColor = Color(0xFFFFA500);
-  static const Color distantColor = Color(0xFFFB5A5A);
+  static const Color green = Color(0xFF11E440);
+  static const Color yellow = Color(0xFFFCFF5A);
+  static const Color orange = Color(0xFFF9CC2D);
+  static const Color red = Color(0xFFFB5A5A);
 
   // text styles:
   late TextStyle titleTextStyle = TextStyle(fontSize: _titleFontSize);

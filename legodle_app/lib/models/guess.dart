@@ -22,7 +22,7 @@ class Guess {
     // determine arrow
     if (difference == 0) {
       icon = Icons.check;
-      color = Styles.correctColor;
+      color = Styles.green;
     } else {
       if (difference < 0) {
         icon = Icons.arrow_downward;
@@ -32,11 +32,11 @@ class Guess {
 
       // determine color
       if (distance < _correctValue * _yellowCutoff) {
-        color = Styles.closeColor;
+        color = Styles.yellow;
       } else if (distance < correctValue * _orangeCutoff) {
-        color = Styles.farColor;
+        color = Styles.orange;
       } else {
-        color = Styles.distantColor;
+        color = Styles.red;
       }
     }
   }
