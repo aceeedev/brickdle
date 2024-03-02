@@ -24,8 +24,8 @@ class Styles {
   late final double _numberFontSize;
 
   // cards:
-  late final double cardWidth;
-  late final double inputCardHeight;
+  late double cardWidth;
+  late double inputCardHeight;
 
   // colors:
   static const Color green = Color(0xFF29F256);

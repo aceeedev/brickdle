@@ -1,3 +1,5 @@
+// ignore_for_file: undefined_getter
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:legodle_app/Styles.dart';
@@ -25,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     LegoSet currentLegoSet = context.watch<GameProvider>().currentLegoSet;
     List<Guess> guesses = context.watch<GameProvider>().guesses;
+    final Styles styles = Styles(context: context);
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -54,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                 )),
             Text(
               context.watch<GameProvider>().numOfGuesses.toString(),
-              style: Styles(context: context).numberTextStyle,
+              style: styles.numberTextStyle,
             ),
             IconButton(
               onPressed: () {},
@@ -64,9 +67,9 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
-              width: Styles(context: context).cardWidth,
+              width: styles.cardWidth,
               // height: MediaQuery.of(context).size.width > 768 ? 60 : 40,
-              height: Styles(context: context).inputCardHeight,
+              height: styles.inputCardHeight,
               child: context.watch<GameProvider>().hasWon
                   ? Text(
                       '🎉 You won!! 🎉',
@@ -86,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                       },
                       textInputAction: TextInputAction.none,
                       textAlign: TextAlign.center,
-                      style: Styles(context: context).numberTextStyle,
+                      style: styles.numberTextStyle,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),
