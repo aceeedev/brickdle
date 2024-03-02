@@ -99,6 +99,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           ...buildGuessCards(guesses),
+          const SizedBox(
+            height: 100,
+          )
         ],
       ),
     ));
