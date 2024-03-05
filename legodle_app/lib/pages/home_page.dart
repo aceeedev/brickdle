@@ -52,7 +52,10 @@ class _HomePageState extends State<HomePage> {
             ),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<GameProvider>().toggleUnlimitedMode();
+                    context.read<GameProvider>().startGame();
+                  },
                   icon: const Icon(
                     Icons.menu,
                     size: Styles.iconButtonSize,

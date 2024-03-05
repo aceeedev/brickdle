@@ -14,7 +14,7 @@ class GameProvider with ChangeNotifier {
   List<Guess> _guesses = [];
   int _numOfGuesses = 0;
   bool _hasWon = false;
-  bool _unlimitedMode = false;
+  bool _unlimitedMode = true;
 
   List<LegoSet> get legoSets => _legoSets;
   LegoSet get currentLegoSet => _currentLegoSet;
@@ -35,7 +35,7 @@ class GameProvider with ChangeNotifier {
 
     List<LegoSet> legoSets = csvData.map((e) => LegoSet.fromList(e)).toList();
 
-    legoSets = legoSets.where((element) => element.pieces >= 500).toList();
+    legoSets = legoSets.where((element) => element.pieces >= 100).toList();
 
     _legoSets = legoSets;
 
@@ -82,6 +82,12 @@ class GameProvider with ChangeNotifier {
 
   void setUnlimitedMode(bool value) {
     _unlimitedMode = value;
+
+    notifyListeners();
+  }
+
+  void toggleUnlimitedMode() {
+    _unlimitedMode = !_unlimitedMode;
 
     notifyListeners();
   }
