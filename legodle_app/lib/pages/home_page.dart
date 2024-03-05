@@ -37,7 +37,9 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Daily Brickdle #${context.read<GameProvider>().todaysNum}',
+              context.read<GameProvider>().unlimitedMode
+                  ? 'Brickdle Unlimited'
+                  : 'Daily Brickdle #${context.read<GameProvider>().todaysNum}',
               style: Styles(context: context).titleTextStyle,
               textAlign: TextAlign.center,
               softWrap: true,
