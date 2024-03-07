@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
+import 'package:legodle_app/backend/storage_manager.dart';
 import 'package:legodle_app/models/lego_set.dart';
 import 'package:legodle_app/models/guess.dart';
 
@@ -10,11 +11,15 @@ class GameProvider with ChangeNotifier {
 
   List<LegoSet> _legoSets = [];
   late LegoSet _currentLegoSet;
+  int _currentLegoSetIndex = 0;
   int _todaysNum = 0;
   List<Guess> _guesses = [];
   int _numOfGuesses = 0;
   bool _hasWon = false;
-  bool _unlimitedMode = true;
+  bool _unlimitedMode = false;
+
+  int get _lastMode => _unlimitedMode ? 1 : 0;
+  int get _correctValue => _currentLegoSet.pieces;
 
   List<LegoSet> get legoSets => _legoSets;
   LegoSet get currentLegoSet => _currentLegoSet;
@@ -42,21 +47,89 @@ class GameProvider with ChangeNotifier {
     return true;
   }
 
-  void startGame() {
-    if (_unlimitedMode) {
-      _currentLegoSet = legoSets[Random().nextInt(legoSets.length)];
-    } else {
-      final int daysAway = DateTime.now().difference(_firstDate).inDays;
-      final int index = daysAway % legoSets.length;
+  /// Returns [bool] if the day, month, and year matches
+  bool sameDate(DateTime firstDate, DateTime secondDate) =>
+      firstDate.day == secondDate.day &&
+      firstDate.month == secondDate.month &&
+      firstDate.year == secondDate.year;
 
-      _todaysNum = daysAway;
-      _currentLegoSet = legoSets[index];
+  void checkIfWon(int value) {
+    if (value == _correctValue) {
+      _hasWon = true;
     }
+  }
 
-    // reset all game variables
+  void _reset() {
     _guesses = [];
     _numOfGuesses = 0;
     _hasWon = false;
+
+    StorageManager.reset();
+  }
+
+  void _initDailyMode() {
+    final int daysAway = DateTime.now().difference(_firstDate).inDays;
+    _currentLegoSetIndex = daysAway % legoSets.length;
+
+    _todaysNum = daysAway;
+  }
+
+  void startGame(BuildContext context) {
+    // see if game should be resumed
+    DateTime? lastPlayed = StorageManager.getLastPlayedDate();
+
+    // has played before, set to last state
+    if (lastPlayed != null) {
+      int modeLastPlayed = StorageManager.getLastMode();
+
+      // set mode
+      switch (modeLastPlayed) {
+        // daily mode
+        case 0:
+          _unlimitedMode = false;
+
+        // unlimited mode
+        case 1:
+          _unlimitedMode = true;
+      }
+
+      // check if it is a new day
+      if (sameDate(DateTime.now(), lastPlayed)) {
+        // resume current lego set
+        if (_unlimitedMode) {
+          _currentLegoSetIndex = StorageManager.getCurrentLegoSetIndex();
+        } else {
+          _initDailyMode();
+        }
+
+        _currentLegoSet = legoSets[_currentLegoSetIndex];
+
+        // restore state
+        _guesses = StorageManager.getGuesses(context);
+        _numOfGuesses = StorageManager.getNumOfGuesses();
+
+        if (_guesses.isNotEmpty) checkIfWon(_guesses.first.value);
+      } else {
+        _reset();
+      }
+    } else {
+      // has not played before
+      // reset all game variables
+      _reset();
+
+      StorageManager.saveCurrentLegoSetIndex(Random().nextInt(legoSets.length));
+    }
+
+    if (!_unlimitedMode) {
+      _initDailyMode();
+
+      _currentLegoSet = legoSets[_currentLegoSetIndex];
+    }
+
+    // save to storage
+    StorageManager.saveLastMode(_lastMode);
+    StorageManager.saveLastPlayedDate(DateTime.now());
+    StorageManager.saveNumOfGuesses(_numOfGuesses);
   }
 
   void addGuess(int value) {
@@ -70,25 +143,29 @@ class GameProvider with ChangeNotifier {
     }
 
     // check if won!
-    final correctValue = _currentLegoSet.pieces;
-    if (value == correctValue) {
-      _hasWon = true;
-    }
+    checkIfWon(value);
 
-    _guesses.insert(0, Guess(value: value, correctValue: correctValue));
+    _guesses.insert(0, Guess(value: value, correctValue: _correctValue));
 
     notifyListeners();
+    StorageManager.saveGuesses(_guesses);
+    StorageManager.saveNumOfGuesses(_numOfGuesses);
   }
 
   void setUnlimitedMode(bool value) {
     _unlimitedMode = value;
 
+    if (value) {
+      _currentLegoSetIndex = Random().nextInt(legoSets.length);
+    }
+
+    _reset();
+
     notifyListeners();
+    StorageManager.saveLastMode(_lastMode);
   }
 
   void toggleUnlimitedMode() {
-    _unlimitedMode = !_unlimitedMode;
-
-    notifyListeners();
+    setUnlimitedMode(!_unlimitedMode);
   }
 }

@@ -16,7 +16,7 @@ class App extends StatelessWidget {
               return Center(
                   child: Text('An error has occurred, ${snapshot.error}'));
             } else if (snapshot.hasData) {
-              context.read<GameProvider>().startGame();
+              context.read<GameProvider>().startGame(context);
 
               return MaterialApp(
                 title: 'Brickdle',

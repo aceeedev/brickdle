@@ -19,11 +19,11 @@ class StorageManager {
     String convertedStr = '';
 
     for (int i = 0; i < listToConvert.length; i++) {
-      if (i != 0 || i != listToConvert.length - 1) {
+      convertedStr += listToConvert[i].toString();
+
+      if (i != listToConvert.length - 1) {
         convertedStr += ' ';
       }
-
-      convertedStr += listToConvert[i].toString();
     }
 
     return convertedStr;
@@ -37,6 +37,8 @@ class StorageManager {
 
     switch (convertType) {
       case Guess:
+        if (strToConvert == '') return <Guess>[];
+
         convertedList = splitStr
             .map((e) => Guess(
                 value: int.parse(e),

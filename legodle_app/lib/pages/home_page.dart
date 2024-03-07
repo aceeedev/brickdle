@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
               IconButton(
                   onPressed: () {
                     context.read<GameProvider>().toggleUnlimitedMode();
-                    context.read<GameProvider>().startGame();
+                    context.read<GameProvider>().startGame(context);
                   },
                   icon: const Icon(
                     Icons.menu,
