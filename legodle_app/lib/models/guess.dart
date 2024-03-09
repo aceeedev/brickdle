@@ -8,6 +8,8 @@ class Guess {
   late int distance;
   late Color color;
   late IconData icon;
+  late String colorEmoji;
+  late String directionEmoji;
 
   // color settings:
   static const double _yellowCutoff = 0.1;
@@ -23,20 +25,27 @@ class Guess {
     if (difference == 0) {
       icon = Icons.check;
       color = Styles.green;
+      colorEmoji = '🟩';
+      directionEmoji = '✅';
     } else {
       if (difference < 0) {
         icon = Icons.arrow_downward;
+        directionEmoji = '⬇️';
       } else {
         icon = Icons.arrow_upward;
+        directionEmoji = '⬆️';
       }
 
       // determine color
       if (distance < _correctValue * _yellowCutoff) {
         color = Styles.yellow;
+        colorEmoji = '🟨';
       } else if (distance < correctValue * _orangeCutoff) {
         color = Styles.orange;
+        colorEmoji = '🟧';
       } else {
         color = Styles.red;
+        colorEmoji = '🟥';
       }
     }
   }

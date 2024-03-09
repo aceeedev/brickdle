@@ -106,8 +106,10 @@ class _HomePageState extends State<HomePage> {
                         child: IconButton(
                           onPressed: context.read<GameProvider>().hasWon
                               ? () {
-                                  Clipboard.setData(
-                                      const ClipboardData(text: "I have won"));
+                                  Clipboard.setData(ClipboardData(
+                                      text: context
+                                          .read<GameProvider>()
+                                          .shareResults()));
                                 }
                               : null,
                           icon: Icon(Icons.share, size: styles.buttonSize),
