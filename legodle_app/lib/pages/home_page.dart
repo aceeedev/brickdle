@@ -77,9 +77,13 @@ class _HomePageState extends State<HomePage> {
                       },
                       icon: Icon(Icons.arrow_forward, size: styles.buttonSize),
                     )
-                  : IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.share, size: styles.buttonSize),
+                  : Opacity(
+                      opacity: context.read<GameProvider>().hasWon ? 1 : 0.15,
+                      child: IconButton(
+                        onPressed:
+                            context.read<GameProvider>().hasWon ? () {} : null,
+                        icon: Icon(Icons.share, size: styles.buttonSize),
+                      ),
                     )
             ]),
             Padding(
