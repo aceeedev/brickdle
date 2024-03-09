@@ -69,11 +69,20 @@ class _HomePageState extends State<HomePage> {
                   style: styles.numberTextStyle,
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.share,
-                    size: Styles(context: context).buttonSize),
-              )
+              context.read<GameProvider>().unlimitedMode
+                  ? IconButton(
+                      onPressed: () {
+                        context.read<GameProvider>().setUnlimitedMode(true);
+                        context.read<GameProvider>().startGame(context);
+                      },
+                      icon: Icon(Icons.arrow_forward,
+                          size: Styles(context: context).buttonSize),
+                    )
+                  : IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.share,
+                          size: Styles(context: context).buttonSize),
+                    )
             ]),
             Padding(
               padding: const EdgeInsets.all(8.0),
