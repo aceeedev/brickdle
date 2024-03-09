@@ -54,8 +54,11 @@ class GameProvider with ChangeNotifier {
       firstDate.year == secondDate.year;
 
   void checkIfWon(int value) {
-    if (value == _correctValue) {
+    double threshold = max(5, min(_correctValue * 0.01, 25));
+    if (_correctValue - threshold <= value &&
+        value <= _correctValue + threshold) {
       _hasWon = true;
+      _guesses[0] = Guess(value: _correctValue, correctValue: _correctValue);
     }
   }
 
@@ -142,10 +145,10 @@ class GameProvider with ChangeNotifier {
       _numOfGuesses++;
     }
 
+    _guesses.insert(0, Guess(value: value, correctValue: _correctValue));
+
     // check if won!
     checkIfWon(value);
-
-    _guesses.insert(0, Guess(value: value, correctValue: _correctValue));
 
     notifyListeners();
     StorageManager.saveGuesses(_guesses);
