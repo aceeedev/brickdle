@@ -44,8 +44,30 @@ class _HomePageState extends State<HomePage> {
               textAlign: TextAlign.center,
               softWrap: true,
             ),
-            Image.network(currentLegoSet.imageUrl,
-                fit: BoxFit.fitWidth, height: 300),
+            Image.network(
+              currentLegoSet.imageUrl,
+              fit: BoxFit.fitWidth,
+              height: 300,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                } else {
+                  return Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 300,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 125, bottom: 125),
+                        child: CircularProgressIndicator(
+                          color: Colors.black.withOpacity(0.2),
+                          strokeWidth: 5,
+                        ),
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
             Text(
               '${currentLegoSet.name} ${currentLegoSet.hasSubtheme ? '(${currentLegoSet.subtheme})' : ''}',
               style: styles.subtitleTextStyle,
