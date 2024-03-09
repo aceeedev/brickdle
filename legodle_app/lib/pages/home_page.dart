@@ -58,9 +58,9 @@ class _HomePageState extends State<HomePage> {
                     context.read<GameProvider>().toggleUnlimitedMode();
                     context.read<GameProvider>().startGame(context);
                   },
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.menu,
-                    size: Styles.iconButtonSize,
+                    size: Styles(context: context).buttonSize,
                   )),
               Padding(
                 padding: const EdgeInsets.only(right: 16, left: 16),
@@ -71,7 +71,8 @@ class _HomePageState extends State<HomePage> {
               ),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.share, size: Styles.iconButtonSize),
+                icon: Icon(Icons.share,
+                    size: Styles(context: context).buttonSize),
               )
             ]),
             Padding(

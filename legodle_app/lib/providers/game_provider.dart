@@ -160,12 +160,14 @@ class GameProvider with ChangeNotifier {
 
     if (value) {
       _currentLegoSetIndex = Random().nextInt(legoSets.length);
+      _currentLegoSet = legoSets[_currentLegoSetIndex];
     }
 
     _reset();
 
     notifyListeners();
     StorageManager.saveLastMode(_lastMode);
+    StorageManager.saveCurrentLegoSetIndex(_currentLegoSetIndex);
   }
 
   void toggleUnlimitedMode() {

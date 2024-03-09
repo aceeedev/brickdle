@@ -9,11 +9,13 @@ class Styles {
       _subtitleFontSize = 24;
       _numberFontSize = 28;
       inputCardHeight = 60;
+      buttonSize = 48;
     } else {
       _titleFontSize = 28;
       _subtitleFontSize = 16;
       _numberFontSize = 24;
       inputCardHeight = 45;
+      buttonSize = 32;
     }
     cardWidth = min(screenWidth * 0.85, 400);
   }
@@ -22,6 +24,9 @@ class Styles {
   late final double _titleFontSize;
   late final double _subtitleFontSize;
   late final double _numberFontSize;
+
+  // button sizes:
+  late final double buttonSize;
 
   // cards:
   late double cardWidth;
@@ -39,7 +44,4 @@ class Styles {
   late TextStyle numberTextStyle = TextStyle(fontSize: _numberFontSize);
   late TextStyle guessTextStyle = TextStyle(
       fontSize: _numberFontSize, color: Colors.black.withOpacity(0.65));
-
-  // misc:
-  static const double iconButtonSize = 48;
 }
