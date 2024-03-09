@@ -1,6 +1,7 @@
 // ignore_for_file: undefined_getter
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:legodle_app/Styles.dart';
 import 'package:legodle_app/providers/game_provider.dart';
@@ -102,8 +103,12 @@ class _HomePageState extends State<HomePage> {
                   : Opacity(
                       opacity: context.read<GameProvider>().hasWon ? 1 : 0.15,
                       child: IconButton(
-                        onPressed:
-                            context.read<GameProvider>().hasWon ? () {} : null,
+                        onPressed: context.read<GameProvider>().hasWon
+                            ? () {
+                                Clipboard.setData(
+                                    const ClipboardData(text: "I have won"));
+                              }
+                            : null,
                         icon: Icon(Icons.share, size: styles.buttonSize),
                       ),
                     )
