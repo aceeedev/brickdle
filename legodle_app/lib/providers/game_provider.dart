@@ -179,7 +179,8 @@ class GameProvider with ChangeNotifier {
     for (int i = 0; i < guesses.length; i++) {
       share = '${guesses[i].colorEmoji}${guesses[i].directionEmoji}\n$share';
     }
-    share = '🧱Daily Brickdle #$_todaysNum🧱\n💡$_numOfGuesses Guesses\n$share';
+    share =
+        '🧱 Daily Brickdle #$_todaysNum 🧱\n💡 $_numOfGuesses Guesses\n$share';
     return share;
   }
 }
