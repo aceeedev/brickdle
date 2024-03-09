@@ -3,8 +3,9 @@ import 'dart:math';
 
 class Styles {
   Styles({required BuildContext context}) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    if (screenWidth > 768) {
+    _screenWidth = MediaQuery.of(context).size.width;
+
+    if (isDesktop) {
       _titleFontSize = 36;
       _subtitleFontSize = 24;
       _numberFontSize = 28;
@@ -17,8 +18,12 @@ class Styles {
       inputCardHeight = 45;
       buttonSize = 32;
     }
-    cardWidth = min(screenWidth * 0.85, 400);
+    cardWidth = min(_screenWidth * 0.85, 400);
   }
+
+  // desktop/mobile:
+  late double _screenWidth;
+  bool get isDesktop => _screenWidth > 768;
 
   // font sizes:
   late final double _titleFontSize;

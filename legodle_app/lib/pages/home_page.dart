@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
               context.read<GameProvider>().unlimitedMode
                   ? 'Brickdle Unlimited'
                   : 'Daily Brickdle #${context.read<GameProvider>().todaysNum}',
-              style: Styles(context: context).titleTextStyle,
+              style: styles.titleTextStyle,
               textAlign: TextAlign.center,
               softWrap: true,
             ),
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                 fit: BoxFit.fitWidth, height: 300),
             Text(
               '${currentLegoSet.name} ${currentLegoSet.hasSubtheme ? '(${currentLegoSet.subtheme})' : ''}',
-              style: Styles(context: context).subtitleTextStyle,
+              style: styles.subtitleTextStyle,
               textAlign: TextAlign.center,
               softWrap: true,
             ),
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   icon: Icon(
                     Icons.menu,
-                    size: Styles(context: context).buttonSize,
+                    size: styles.buttonSize,
                   )),
               Padding(
                 padding: const EdgeInsets.only(right: 16, left: 16),
@@ -75,13 +75,11 @@ class _HomePageState extends State<HomePage> {
                         context.read<GameProvider>().setUnlimitedMode(true);
                         context.read<GameProvider>().startGame(context);
                       },
-                      icon: Icon(Icons.arrow_forward,
-                          size: Styles(context: context).buttonSize),
+                      icon: Icon(Icons.arrow_forward, size: styles.buttonSize),
                     )
                   : IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.share,
-                          size: Styles(context: context).buttonSize),
+                      icon: Icon(Icons.share, size: styles.buttonSize),
                     )
             ]),
             Padding(
@@ -93,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                 child: context.watch<GameProvider>().hasWon
                     ? Text(
                         '🎉 You won!! 🎉',
-                        style: Styles(context: context).titleTextStyle,
+                        style: styles.titleTextStyle,
                         textAlign: TextAlign.center,
                         softWrap: true,
                       )
@@ -107,7 +105,9 @@ class _HomePageState extends State<HomePage> {
                             guessTextEditingController.clear();
                           }
                         },
-                        textInputAction: TextInputAction.none,
+                        textInputAction: styles.isDesktop
+                            ? TextInputAction.none
+                            : TextInputAction.done,
                         textAlign: TextAlign.center,
                         style: styles.numberTextStyle,
                         decoration: InputDecoration(
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                             borderSide: BorderSide.none,
                           ),
                           hintText: 'How many bricks?',
-                          hintStyle: Styles(context: context).subtitleTextStyle,
+                          hintStyle: styles.subtitleTextStyle,
                           filled: true,
                           fillColor: const Color(0x0D000000),
                         ),
