@@ -40,8 +40,6 @@ class GameProvider with ChangeNotifier {
 
     List<LegoSet> legoSets = csvData.map((e) => LegoSet.fromList(e)).toList();
 
-    legoSets = legoSets.where((element) => element.pieces >= 100).toList();
-
     _legoSets = legoSets;
 
     return true;
