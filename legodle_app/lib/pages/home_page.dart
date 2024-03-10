@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
     final Styles styles = Styles(context: context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 20.0),
@@ -70,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               Text(
-                '${currentLegoSet.name} ${currentLegoSet.hasSubtheme ? '(${currentLegoSet.subtheme})' : ''}',
+                '${currentLegoSet.name} ${currentLegoSet.hasSubtheme ? '(${currentLegoSet.theme})' : ''}',
                 style: styles.subtitleTextStyle,
                 textAlign: TextAlign.center,
                 softWrap: true,
