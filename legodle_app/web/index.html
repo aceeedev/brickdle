@@ -36,17 +36,29 @@
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
   </script>
+  <script src="flutter.js" defer></script>
 </head>
 <body>
-  <h1>This is my website!</h1>
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function() {
-          navigator.serviceWorker.register("flutter_service_worker.js");
-        });
-      }
-    </script>
-    <flutter-app></flutter-app>
-    <script src="flutter-app.js"></script>
+  <!-- <h1>This is my website!</h1> -->
+  <div id="flutter_host" style="width: 100%; height: 100vh">Loading...</div>
+
+  <script>
+    window.addEventListener("load", function (ev) {
+      _flutter.loader.loadEntrypoint({
+        onEntrypointLoaded: async function(engineInitializer) {
+          let config = {
+            // fixes images not rendering
+            renderer: "html",
+            // Pass a reference to "div#flutter_host" into the Flutter engine.
+            hostElement: document.querySelector("#flutter_host")
+          };
+
+          let appRunner = await engineInitializer.initializeEngine(config);
+
+          appRunner.runApp();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
