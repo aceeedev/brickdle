@@ -111,6 +111,27 @@ class _HomePageState extends State<HomePage> {
                                       text: context
                                           .read<GameProvider>()
                                           .shareResults()));
+                                  var snackBar = SnackBar(
+                                    content: const Center(
+                                        child: Text('Copied to Clipboard!')),
+                                    dismissDirection: DismissDirection.none,
+                                    // animation: AnimationController(vsync: none),
+                                    behavior: SnackBarBehavior.floating,
+                                    margin: EdgeInsets.only(
+                                      bottom:
+                                          MediaQuery.of(context).size.height -
+                                              100,
+                                      left: (MediaQuery.of(context).size.width -
+                                              200) /
+                                          2,
+                                      right:
+                                          (MediaQuery.of(context).size.width -
+                                                  200) /
+                                              2,
+                                    ),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
                                 }
                               : null,
                           icon: Icon(Icons.share, size: styles.buttonSize),
