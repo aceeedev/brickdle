@@ -29,35 +29,24 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>legodle_app</title>
+  <title>Brickdle</title>
   <link rel="manifest" href="manifest.json">
 
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
   </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
 </head>
 <body>
-  <script>
-    let useHtml = true;
-
-    window.addEventListener('load', function(ev) {
-    _flutter.loader.loadEntrypoint({
-      serviceWorker: {
-        serviceWorkerVersion: serviceWorkerVersion,
-      },
-      onEntrypointLoaded: function(engineInitializer) {
-        let config = {
-          renderer: useHtml ? "html" : "canvaskit",
-        };
-        engineInitializer.initializeEngine(config).then(function(appRunner) {
-          appRunner.runApp();
+  <h1>This is my website!</h1>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker.register("flutter_service_worker.js");
         });
       }
-    });
-    });
-  </script>
+    </script>
+    <flutter-app></flutter-app>
+    <script src="flutter-app.js"></script>
 </body>
 </html>
