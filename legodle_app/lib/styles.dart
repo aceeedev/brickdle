@@ -42,10 +42,12 @@ class Styles {
     double desktopPadding = (_screenWidth / 2) - 420;
     if (desktopPadding <= 0) desktopPadding = 100;
 
-    return EdgeInsets.symmetric(horizontal: isDesktop ? desktopPadding : 50);
+    return EdgeInsets.symmetric(horizontal: isDesktop ? desktopPadding : 30);
   }
 
   // colors:
+  static const Color backgroundColor = Colors.white;
+  static const Color iconColor = Colors.black;
   static const Color green = Color(0xFF29F256);
   static const Color yellow = Color(0xFFFCFF5A);
   static const Color orange = Color(0xFFF9CC2D);
@@ -57,4 +59,13 @@ class Styles {
   late TextStyle numberTextStyle = TextStyle(fontSize: _numberFontSize);
   late TextStyle guessTextStyle = TextStyle(
       fontSize: _numberFontSize, color: Colors.black.withOpacity(0.65));
+  final TextStyle infoTextStyle = const TextStyle(
+    fontFamily: 'Inria Sans',
+    fontSize: 16,
+  );
+  final TextStyle infoTextStyleUnderline = const TextStyle(
+    fontFamily: 'Inria Sans',
+    fontSize: 16,
+    decoration: TextDecoration.underline,
+  );
 }

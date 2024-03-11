@@ -1,11 +1,11 @@
 {
-    "name": "legodle_app",
-    "short_name": "legodle_app",
+    "name": "brickdle",
+    "short_name": "brickdle",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Guess the number of Lego pieces. New sets released daily.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

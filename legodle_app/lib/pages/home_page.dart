@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     final Styles styles = Styles(context: context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Styles.backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 20.0),
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 HamburgerMenu(),
                 Padding(
-                  padding: const EdgeInsets.only(right: 16, left: 16),
+                  padding: const EdgeInsets.only(right: 32, left: 32),
                   child: Text(
                     context.watch<GameProvider>().numOfGuesses.toString(),
                     style: styles.numberTextStyle,
@@ -90,8 +90,11 @@ class _HomePageState extends State<HomePage> {
                           context.read<GameProvider>().setUnlimitedMode(true);
                           context.read<GameProvider>().startGame(context);
                         },
-                        icon:
-                            Icon(Icons.arrow_forward, size: styles.buttonSize),
+                        icon: Icon(
+                          Icons.arrow_forward,
+                          size: styles.buttonSize,
+                          color: Styles.iconColor,
+                        ),
                       )
                     : Opacity(
                         opacity: context.read<GameProvider>().hasWon ? 1 : 0.15,
@@ -125,7 +128,11 @@ class _HomePageState extends State<HomePage> {
                                       .showSnackBar(snackBar);
                                 }
                               : null,
-                          icon: Icon(Icons.share, size: styles.buttonSize),
+                          icon: Icon(
+                            Icons.share,
+                            size: styles.buttonSize,
+                            color: Styles.iconColor,
+                          ),
                         ),
                       )
               ]),
@@ -142,30 +149,38 @@ class _HomePageState extends State<HomePage> {
                           textAlign: TextAlign.center,
                           softWrap: true,
                         )
-                      : TextFormField(
-                          controller: guessTextEditingController,
-                          onFieldSubmitted: (value) {
-                            final valueAsInt = int.tryParse(value);
-                            if (valueAsInt != null) {
-                              context.read<GameProvider>().addGuess(valueAsInt);
+                      : Center(
+                          child: TextFormField(
+                            controller: guessTextEditingController,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            onFieldSubmitted: (value) {
+                              final valueAsInt = int.tryParse(value);
+                              if (valueAsInt != null && valueAsInt >= 1) {
+                                context
+                                    .read<GameProvider>()
+                                    .addGuess(valueAsInt);
 
-                              guessTextEditingController.clear();
-                            }
-                          },
-                          textInputAction: styles.isDesktop
-                              ? TextInputAction.none
-                              : TextInputAction.done,
-                          textAlign: TextAlign.center,
-                          style: styles.numberTextStyle,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: BorderSide.none,
+                                guessTextEditingController.clear();
+                              }
+                            },
+                            textInputAction: styles.isDesktop
+                                ? TextInputAction.none
+                                : TextInputAction.done,
+                            textAlign: TextAlign.center,
+                            style: styles.numberTextStyle,
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                borderSide: BorderSide.none,
+                              ),
+                              hintText: 'How many bricks?',
+                              hintStyle: styles.subtitleTextStyle,
+                              filled: true,
+                              fillColor: const Color(0x0D000000),
                             ),
-                            hintText: 'How many bricks?',
-                            hintStyle: styles.subtitleTextStyle,
-                            filled: true,
-                            fillColor: const Color(0x0D000000),
                           ),
                         ),
                 ),
