@@ -32,9 +32,8 @@ class HamburgerMenu extends StatelessWidget {
           onTap: () => _showDialog(
             context: context,
             title: 'How To Play',
-            content: Text(
-              'abc',
-              textAlign: TextAlign.center,
+            content: const Text(
+              'Guess the number of pieces with unlimited attempts.\n▪ Each guess must be a valid number.\n▪ The color of the tile shows how close your guess is.\n\nShare your results with friends!\nA new game is released daily at midnight.',
             ),
           ),
         ),
@@ -46,7 +45,6 @@ class HamburgerMenu extends StatelessWidget {
             title: 'Disclaimer',
             content: const Text(
               'LEGO, the LEGO logo, the Minifigure, and the Brick and Knob configurations are trademarks of the LEGO Group of Companies. ©2024 The LEGO Group.',
-              textAlign: TextAlign.center,
             ),
           ),
         ),

@@ -39,7 +39,7 @@ class Styles {
 
   // dialogs:
   EdgeInsets get dialogInsetPadding {
-    double desktopPadding = (_screenWidth / 2) - 500;
+    double desktopPadding = (_screenWidth / 2) - 420;
     if (desktopPadding <= 0) desktopPadding = 100;
 
     return EdgeInsets.symmetric(horizontal: isDesktop ? desktopPadding : 50);
