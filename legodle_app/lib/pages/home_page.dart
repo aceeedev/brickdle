@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:legodle_app/Styles.dart';
+import 'package:legodle_app/styles.dart';
 import 'package:legodle_app/providers/game_provider.dart';
 import 'package:legodle_app/models/lego_set.dart';
 import 'package:legodle_app/models/guess.dart';
