@@ -1,5 +1,3 @@
-// ignore_for_file: undefined_getter
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +6,7 @@ import 'package:legodle_app/providers/game_provider.dart';
 import 'package:legodle_app/models/lego_set.dart';
 import 'package:legodle_app/models/guess.dart';
 import 'package:legodle_app/widgets/guess_card_widget.dart';
+import 'package:legodle_app/widgets/hamburger_menu_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -77,15 +76,7 @@ class _HomePageState extends State<HomePage> {
                 softWrap: true,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                IconButton(
-                    onPressed: () {
-                      context.read<GameProvider>().toggleUnlimitedMode();
-                      context.read<GameProvider>().startGame(context);
-                    },
-                    icon: Icon(
-                      Icons.menu,
-                      size: styles.buttonSize,
-                    )),
+                HamburgerMenu(),
                 Padding(
                   padding: const EdgeInsets.only(right: 16, left: 16),
                   child: Text(

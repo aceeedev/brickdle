@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -36,6 +38,14 @@ class Styles {
   // cards:
   late double cardWidth;
   late double inputCardHeight;
+
+  // dialogs:
+  EdgeInsets get dialogInsetPadding {
+    double desktopPadding = (_screenWidth / 2) - 500;
+    if (desktopPadding <= 0) desktopPadding = 100;
+
+    return EdgeInsets.symmetric(horizontal: isDesktop ? desktopPadding : 50);
+  }
 
   // colors:
   static const Color green = Color(0xFF29F256);
