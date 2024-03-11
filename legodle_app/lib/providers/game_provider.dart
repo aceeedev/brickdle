@@ -142,9 +142,8 @@ class GameProvider with ChangeNotifier {
     // see if guessed before
     if (!_guesses.map((e) => e.value).toList().contains(value)) {
       _numOfGuesses++;
+      _guesses.insert(0, Guess(value: value, correctValue: _correctValue));
     }
-
-    _guesses.insert(0, Guess(value: value, correctValue: _correctValue));
 
     // check if won!
     checkIfWon(value);
