@@ -23,12 +23,12 @@ class LegoSet {
 
   factory LegoSet.fromList(List<dynamic> list) {
     return LegoSet(
-        number: list[0],
-        theme: list[1],
+        number: list[0].toString(),
+        theme: list[1].toString(),
         subtheme: list[2].toString(),
-        name: list[3],
-        pieces: list[4],
-        price: list[5],
-        year: list[6]);
+        name: list[3].toString(),
+        pieces: double.parse(list[4]) as int,
+        price: double.parse(list[5]),
+        year: int.parse(list[6]));
   }
 }

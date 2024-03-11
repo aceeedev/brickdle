@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
-import 'package:csv/csv.dart';
 import 'package:legodle_app/backend/storage_manager.dart';
 import 'package:legodle_app/models/lego_set.dart';
 import 'package:legodle_app/models/guess.dart';
@@ -35,10 +34,12 @@ class GameProvider with ChangeNotifier {
         await rootBundle.loadString('assets/data/filtered_data.csv');
 
     // format: [Number, Theme, Subtheme, Set name, Pieces, RRP (USD), Year]
-    List<List<dynamic>> csvData = const CsvToListConverter().convert(fileData);
-    csvData.removeAt(0); // remove header
+    List<String> csvRows = fileData.split('\n');
+    csvRows.removeAt(0); // remove header
+    csvRows.removeLast(); // remove empty last line
 
-    List<LegoSet> legoSets = csvData.map((e) => LegoSet.fromList(e)).toList();
+    List<LegoSet> legoSets =
+        csvRows.map((e) => LegoSet.fromList(e.split(','))).toList();
 
     _legoSets = legoSets;
 
