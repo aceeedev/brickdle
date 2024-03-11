@@ -13,6 +13,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Archivo Black',
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
       ),
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
