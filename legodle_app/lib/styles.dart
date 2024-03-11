@@ -42,7 +42,7 @@ class Styles {
     double desktopPadding = (_screenWidth / 2) - 420;
     if (desktopPadding <= 0) desktopPadding = 100;
 
-    return EdgeInsets.symmetric(horizontal: isDesktop ? desktopPadding : 50);
+    return EdgeInsets.symmetric(horizontal: isDesktop ? desktopPadding : 30);
   }
 
   // colors:
@@ -59,4 +59,13 @@ class Styles {
   late TextStyle numberTextStyle = TextStyle(fontSize: _numberFontSize);
   late TextStyle guessTextStyle = TextStyle(
       fontSize: _numberFontSize, color: Colors.black.withOpacity(0.65));
+  final TextStyle infoTextStyle = const TextStyle(
+    fontFamily: 'Inria Sans',
+    fontSize: 16,
+  );
+  final TextStyle infoTextStyleUnderline = const TextStyle(
+    fontFamily: 'Inria Sans',
+    fontSize: 16,
+    decoration: TextDecoration.underline,
+  );
 }

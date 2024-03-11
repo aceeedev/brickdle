@@ -22,8 +22,8 @@ class HamburgerMenu extends StatelessWidget {
         PopupMenuItem(
           value: 0,
           child: Text(context.read<GameProvider>().unlimitedMode
-              ? 'Switch To Daily Mode'
-              : 'Switch To Unlimited Mode'),
+              ? '🔄 Switch To Daily Mode'
+              : '🔄 Switch To Unlimited Mode'),
           onTap: () {
             context.read<GameProvider>().toggleUnlimitedMode();
             context.read<GameProvider>().startGame(context);
@@ -31,34 +31,60 @@ class HamburgerMenu extends StatelessWidget {
         ),
         PopupMenuItem(
           value: 1,
-          child: const Text('How To Play'),
+          child: const Text('❓ How To Play'),
           onTap: () => _showDialog(
             context: context,
             title: 'How To Play',
-            content: const Text(
+            content: Text(
               'Guess the number of pieces in the set with unlimited attempts.\n▪ Each guess must be a valid number.\n▪ Your guess can be a certain threshold away and still win.\n▪ Incorrect guesses will guide you to the correct answer.\n▪ The color of the tile shows how close your guess is.\n▪ The arrow indicates if the guess is higher or lower.\n\nShare your results with friends!\nCome back each day for a new release!',
+              style: styles.infoTextStyle,
             ),
           ),
         ),
         PopupMenuItem(
           value: 2,
-          child: const Text('Disclaimer'),
+          child: const Text('📜 Disclaimer'),
           onTap: () => _showDialog(
             context: context,
             title: 'Disclaimer',
-            content: const Text(
-              'LEGO, the LEGO logo, the Minifigure, and the Brick and Knob configurations are trademarks of the LEGO Group of Companies. ©2024 The LEGO Group.',
+            content: Text(
+              'LEGO, the LEGO logo, the Minifigure, and the Brick and Knob configurations are trademarks of the LEGO Group of Companies. ©2024 The LEGO Group.\n\nBrickdle and all content not covered by The LEGO Group\'s copyright is, unless otherwise stated, ©2024 Brickdle.',
+              style: styles.infoTextStyle,
             ),
           ),
         ),
         PopupMenuItem(
           value: 3,
-          child: const Text('Credits'),
+          child: const Text('✨ Credits'),
           onTap: () => _showDialog(
             context: context,
             title: 'Credits',
-            content: const Text(
-              'Inspired by Wordle created by Josh Wardle, Brickdle is made by Andrew Collins and Riley Wong.',
+            content: RichText(
+              text: TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                    text:
+                        'Inspired by Wordle created by Josh Wardle, Brickdle is made by Andrew Collins and Riley Wong.\n\nContact us at ',
+                    style: styles.infoTextStyle,
+                  ),
+                  TextSpan(
+                    text: 'acollins2@scu.edu',
+                    style: styles.infoTextStyleUnderline,
+                  ),
+                  TextSpan(
+                    text: ' and ',
+                    style: styles.infoTextStyle,
+                  ),
+                  TextSpan(
+                    text: 'rnwong@scu.edu',
+                    style: styles.infoTextStyleUnderline,
+                  ),
+                  TextSpan(
+                    text: ' for any questions or concerns.',
+                    style: styles.infoTextStyle,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
