@@ -48,6 +48,17 @@ class HamburgerMenu extends StatelessWidget {
             ),
           ),
         ),
+        PopupMenuItem(
+          value: 3,
+          child: const Text('Credits'),
+          onTap: () => _showDialog(
+            context: context,
+            title: 'Credits',
+            content: const Text(
+              'Inspired by Wordle created by Josh Wardle, Brickdle is made by Andrew Collins and Riley Wong.',
+            ),
+          ),
+        ),
       ],
     );
   }
