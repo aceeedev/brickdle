@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 HamburgerMenu(),
                 Padding(
-                  padding: const EdgeInsets.only(right: 16, left: 16),
+                  padding: const EdgeInsets.only(right: 32, left: 32),
                   child: Text(
                     context.watch<GameProvider>().numOfGuesses.toString(),
                     style: styles.numberTextStyle,
