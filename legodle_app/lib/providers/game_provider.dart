@@ -178,7 +178,7 @@ class GameProvider with ChangeNotifier {
       share = '${guesses[i].colorEmoji}${guesses[i].directionEmoji}\n$share';
     }
     share =
-        '🧱 Daily Brickdle #$_todaysNum 🧱\n💡 $_numOfGuesses Guesses\n$share\nPlay at https://brickdle.com';
+        '🧱 Daily Brickdle #$_todaysNum 🧱\n🔎 ${_currentLegoSet.name}\n💡 $_numOfGuesses Guesses\n$share\nPlay at https://brickdle.com';
     return share;
   }
 }
