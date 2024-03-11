@@ -174,12 +174,12 @@ class GameProvider with ChangeNotifier {
   }
 
   String shareResults() {
-    String share = '';
-    for (int i = 0; i < guesses.length; i++) {
+    String share = '${guesses[0].colorEmoji}${guesses[0].directionEmoji}';
+    for (int i = 1; i < guesses.length; i++) {
       share = '${guesses[i].colorEmoji}${guesses[i].directionEmoji}\n$share';
     }
     share =
-        '🧱 Daily Brickdle #$_todaysNum 🧱\n💡 $_numOfGuesses Guesses\n$share';
+        '🧱 Daily Brickdle #$_todaysNum 🧱\n💡 $_numOfGuesses Guesses\n$share\nPlay at https://brickdle.com';
     return share;
   }
 }
