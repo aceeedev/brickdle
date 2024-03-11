@@ -33,7 +33,7 @@ class HamburgerMenu extends StatelessWidget {
             context: context,
             title: 'How To Play',
             content: const Text(
-              'Guess the number of pieces with unlimited attempts.\n▪ Each guess must be a valid number.\n▪ The color of the tile shows how close your guess is.\n\nShare your results with friends!\nA new game is released daily at midnight.',
+              'Guess the number of pieces in the set with unlimited attempts.\n▪ Each guess must be a valid number.\n▪ Your guess can be a certain threshold away and still win.\n▪ Incorrect guesses will guide you to the correct answer.\n▪ The color of the tile shows how close your guess is.\n▪ The arrow indicates if the guess is higher or lower.\n\nShare your results with friends!\nCome back each day for a new release!',
             ),
           ),
         ),
