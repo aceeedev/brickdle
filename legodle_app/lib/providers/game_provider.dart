@@ -1,10 +1,12 @@
 import 'dart:math';
+import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
 import 'package:legodle_app/backend/storage_manager.dart';
 import 'package:legodle_app/models/lego_set.dart';
 import 'package:legodle_app/models/guess.dart';
+import 'package:legodle_app/styles.dart';
 
 class GameProvider with ChangeNotifier {
   static final DateTime _firstDate = DateTime(2024, 3, 11);
@@ -31,8 +33,11 @@ class GameProvider with ChangeNotifier {
 
   /// gets and sets all lego sets. Returns [true] if successful
   Future<bool> getAndSetLegoSets() async {
-    String fileData =
-        await rootBundle.loadString('assets/data/filtered_data.csv');
+    // build release silly things:
+    String rootAssetsDirectory = kReleaseMode ? 'assets/assets/' : 'assets/';
+
+    String fileData = await rootBundle
+        .loadString('${rootAssetsDirectory}data/filtered_data.csv');
 
     // format: [Number, Theme, Subtheme, Set name, Pieces, RRP (USD), Year]
     List<List<dynamic>> csvData = const CsvToListConverter().convert(fileData);
