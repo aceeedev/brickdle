@@ -7,7 +7,7 @@ import 'package:legodle_app/models/lego_set.dart';
 import 'package:legodle_app/models/guess.dart';
 
 class GameProvider with ChangeNotifier {
-  static final DateTime _firstDate = DateTime(2024, 3, 3);
+  static final DateTime _firstDate = DateTime(2024, 3, 11);
 
   List<LegoSet> _legoSets = [];
   late LegoSet _currentLegoSet;
