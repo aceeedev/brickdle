@@ -46,6 +46,8 @@ class Styles {
   }
 
   // colors:
+  static const Color backgroundColor = Colors.white;
+  static const Color iconColor = Colors.black;
   static const Color green = Color(0xFF29F256);
   static const Color yellow = Color(0xFFFCFF5A);
   static const Color orange = Color(0xFFF9CC2D);

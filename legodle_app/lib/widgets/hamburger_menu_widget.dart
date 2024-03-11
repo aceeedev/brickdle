@@ -11,9 +11,12 @@ class HamburgerMenu extends StatelessWidget {
     final Styles styles = Styles(context: context);
 
     return PopupMenuButton(
+      color: Styles.backgroundColor,
+      surfaceTintColor: Colors.transparent,
       icon: Icon(
         Icons.menu,
         size: styles.buttonSize,
+        color: Styles.iconColor,
       ),
       itemBuilder: (context) => [
         PopupMenuItem(
@@ -70,8 +73,12 @@ class HamburgerMenu extends StatelessWidget {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
+        final Styles styles = Styles(context: context);
+
         return AlertDialog(
-          insetPadding: Styles(context: context).dialogInsetPadding,
+          backgroundColor: Styles.backgroundColor,
+          surfaceTintColor: Colors.transparent,
+          insetPadding: styles.dialogInsetPadding,
           title: Text(title, textAlign: TextAlign.center),
           content: content,
         );
