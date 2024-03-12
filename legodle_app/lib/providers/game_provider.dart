@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:legodle_app/backend/storage_manager.dart';
 import 'package:legodle_app/models/lego_set.dart';
 import 'package:legodle_app/models/guess.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 class GameProvider with ChangeNotifier {
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
+
   static final DateTime _firstDate = DateTime(2024, 3, 11);
 
   List<LegoSet> _legoSets = [];
@@ -154,12 +159,20 @@ class GameProvider with ChangeNotifier {
   }
 
   void setUnlimitedMode(bool value) {
-    _unlimitedMode = value;
-
     if (value) {
       _currentLegoSetIndex = Random().nextInt(legoSets.length);
       _currentLegoSet = legoSets[_currentLegoSetIndex];
+      // analytics
+      analytics.logEvent(
+        name: 'unlimited_mode',
+        parameters: {
+          'current_set': _currentLegoSet.name,
+          'played_again': (_unlimitedMode == value) ? 1 : 0,
+        },
+      );
     }
+
+    _unlimitedMode = value;
 
     _reset();
 
@@ -179,6 +192,18 @@ class GameProvider with ChangeNotifier {
     }
     share =
         '🧱 Daily Brickdle #$_todaysNum 🧱\n🔎 ${_currentLegoSet.name}\n💡 $_numOfGuesses Guesses\n$share\nPlay at https://brickdle.com';
+    // analytics
+    analytics.logEvent(
+      name: 'share_results',
+      parameters: {
+        'daily_number': _todaysNum,
+        'set_name': _currentLegoSet.name,
+        'set_pieces': _currentLegoSet.pieces,
+        'num_guesses': _numOfGuesses,
+        'guesses': _guesses.join(','),
+        'share_text': share,
+      },
+    );
     return share;
   }
 }
