@@ -21,7 +21,7 @@ class GameProvider with ChangeNotifier {
   int _numOfGuesses = 0;
   bool _hasWon = false;
   bool _unlimitedMode = false;
-  List<int> _numGuessesInUnlimitedMode = [];
+  final List<int> _numGuessesInUnlimitedMode = [];
 
   int get _lastMode => _unlimitedMode ? 1 : 0;
   int get _correctValue => _currentLegoSet.pieces;
