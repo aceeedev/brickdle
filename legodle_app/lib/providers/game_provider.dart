@@ -21,6 +21,7 @@ class GameProvider with ChangeNotifier {
   int _numOfGuesses = 0;
   bool _hasWon = false;
   bool _unlimitedMode = false;
+  List<int> _numGuessesInUnlimitedMode = [];
 
   int get _lastMode => _unlimitedMode ? 1 : 0;
   int get _correctValue => _currentLegoSet.pieces;
@@ -32,6 +33,13 @@ class GameProvider with ChangeNotifier {
   int get numOfGuesses => _numOfGuesses;
   bool get hasWon => _hasWon;
   bool get unlimitedMode => _unlimitedMode;
+  double get averageNumGuessesInUnlimitedMode {
+    if (_numGuessesInUnlimitedMode.isEmpty) return 0;
+    int length = _numGuessesInUnlimitedMode.length;
+    int sum = _numGuessesInUnlimitedMode.reduce((a, b) => a + b);
+
+    return sum / length;
+  }
 
   /// gets and sets all lego sets. Returns [true] if successful
   Future<bool> getAndSetLegoSets() async {
@@ -63,6 +71,11 @@ class GameProvider with ChangeNotifier {
         value <= _correctValue + threshold) {
       _hasWon = true;
       _guesses[0] = Guess(value: _correctValue, correctValue: _correctValue);
+
+      // save if in unlimited mode for average calculation
+      if (_unlimitedMode) {
+        _numGuessesInUnlimitedMode.add(_numOfGuesses);
+      }
     }
   }
 

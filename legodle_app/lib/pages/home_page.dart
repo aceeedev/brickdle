@@ -136,6 +136,17 @@ class _HomePageState extends State<HomePage> {
                         ),
                       )
               ]),
+              if (context.watch<GameProvider>().unlimitedMode &&
+                  context
+                          .watch<GameProvider>()
+                          .averageNumGuessesInUnlimitedMode !=
+                      0)
+                Text(
+                  'Average guesses: ${context.watch<GameProvider>().averageNumGuessesInUnlimitedMode.toStringAsFixed(2)}',
+                  style: styles.subtitleTextStyle,
+                  textAlign: TextAlign.center,
+                  softWrap: true,
+                ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
