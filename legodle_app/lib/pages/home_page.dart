@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                 softWrap: true,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                HamburgerMenu(),
+                const HamburgerMenu(),
                 Padding(
                   padding: const EdgeInsets.only(right: 32, left: 32),
                   child: Text(
@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                           .averageNumGuessesInUnlimitedMode !=
                       0)
                 Text(
-                  'Average guesses: ${context.watch<GameProvider>().averageNumGuessesInUnlimitedMode.toStringAsFixed(2)}',
+                  'Your average guesses: ${context.watch<GameProvider>().averageNumGuessesInUnlimitedMode.toStringAsFixed(2)}',
                   style: styles.subtitleTextStyle,
                   textAlign: TextAlign.center,
                   softWrap: true,
