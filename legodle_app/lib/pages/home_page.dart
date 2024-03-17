@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 context.read<GameProvider>().unlimitedMode
                     ? IconButton(
+                        tooltip: 'Next Set',
                         onPressed: () {
                           context.read<GameProvider>().setUnlimitedMode(true);
                           context.read<GameProvider>().startGame(context);
@@ -99,6 +100,7 @@ class _HomePageState extends State<HomePage> {
                     : Opacity(
                         opacity: context.read<GameProvider>().hasWon ? 1 : 0.15,
                         child: IconButton(
+                          tooltip: 'Share',
                           onPressed: context.read<GameProvider>().hasWon
                               ? () {
                                   Clipboard.setData(ClipboardData(
