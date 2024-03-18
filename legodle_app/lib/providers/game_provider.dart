@@ -66,7 +66,7 @@ class GameProvider with ChangeNotifier {
       firstDate.year == secondDate.year;
 
   void checkIfWon(int value) {
-    double threshold = max(3, min(_correctValue * 0.01, 25));
+    double threshold = max(3, min(_correctValue * 0.01, 10));
     if (_correctValue - threshold <= value &&
         value <= _correctValue + threshold) {
       _hasWon = true;
