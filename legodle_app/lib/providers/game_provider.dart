@@ -72,6 +72,19 @@ class GameProvider with ChangeNotifier {
       _hasWon = true;
       _guesses[0] = Guess(value: _correctValue, correctValue: _correctValue);
 
+      if (!_unlimitedMode) {
+        analytics.logEvent(
+          name: 'game_won',
+          parameters: {
+            'daily_number': _todaysNum,
+            'set_name': _currentLegoSet.name,
+            'set_pieces': _currentLegoSet.pieces,
+            'num_guesses': _numOfGuesses,
+            'guesses': _guesses.join(','),
+          },
+        );
+      }
+
       // save if in unlimited mode for average calculation
       if (_unlimitedMode) {
         _numGuessesInUnlimitedMode.add(_numOfGuesses);
