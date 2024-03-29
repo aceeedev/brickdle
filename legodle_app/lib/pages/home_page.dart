@@ -149,6 +149,12 @@ class _HomePageState extends State<HomePage> {
                   textAlign: TextAlign.center,
                   softWrap: true,
                 ),
+              OutlinedButton(
+                onPressed: () {
+                  debugPrint('Received click');
+                },
+                child: const Text('Enter'),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
@@ -162,38 +168,34 @@ class _HomePageState extends State<HomePage> {
                           textAlign: TextAlign.center,
                           softWrap: true,
                         )
-                      : Center(
-                          child: TextFormField(
-                            controller: guessTextEditingController,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                            onFieldSubmitted: (value) {
-                              final valueAsInt = int.tryParse(value);
-                              if (valueAsInt != null && valueAsInt >= 1) {
-                                context
-                                    .read<GameProvider>()
-                                    .addGuess(valueAsInt);
+                      : TextFormField(
+                          controller: guessTextEditingController,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          onFieldSubmitted: (value) {
+                            final valueAsInt = int.tryParse(value);
+                            if (valueAsInt != null && valueAsInt >= 1) {
+                              context.read<GameProvider>().addGuess(valueAsInt);
 
-                                guessTextEditingController.clear();
-                              }
-                            },
-                            textInputAction: styles.isDesktop
-                                ? TextInputAction.none
-                                : TextInputAction.done,
-                            textAlign: TextAlign.center,
-                            style: styles.numberTextStyle,
-                            cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                borderSide: BorderSide.none,
-                              ),
-                              hintText: 'How many bricks?',
-                              hintStyle: styles.subtitleTextStyle,
-                              filled: true,
-                              fillColor: const Color(0x0D000000),
+                              guessTextEditingController.clear();
+                            }
+                          },
+                          textInputAction: styles.isDesktop
+                              ? TextInputAction.none
+                              : TextInputAction.done,
+                          textAlign: TextAlign.center,
+                          style: styles.numberTextStyle,
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              borderSide: BorderSide.none,
                             ),
+                            hintText: 'How many bricks?',
+                            hintStyle: styles.subtitleTextStyle,
+                            filled: true,
+                            fillColor: const Color(0x0D000000),
                           ),
                         ),
                 ),
