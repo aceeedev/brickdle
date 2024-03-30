@@ -171,12 +171,12 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(15),
                                 boxShadow: const [
                                   BoxShadow(
-                                    color: Color(0x08000000),
+                                    color: Color(0x10000000),
                                   ),
                                   BoxShadow(
                                     color: Colors.white,
-                                    spreadRadius: -3,
-                                    blurRadius: 5,
+                                    spreadRadius: -2,
+                                    blurRadius: 4,
                                     offset: Offset(-1, -2),
                                   ),
                                 ],
@@ -218,20 +218,20 @@ class _HomePageState extends State<HomePage> {
                             Container(
                               height: styles.inputCardHeight,
                               width: styles.cardWidth * 0.28,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color(0x10000000),
-                                  ),
-                                  BoxShadow(
-                                    color: Colors.white,
-                                    spreadRadius: -3,
-                                    blurRadius: 5,
-                                    offset: Offset(-1, -2),
-                                  ),
-                                ],
-                              ),
+                              // decoration: BoxDecoration(
+                              //   borderRadius: BorderRadius.circular(15),
+                              //   boxShadow: const [
+                              //     BoxShadow(
+                              //       color: Color(0x15000000),
+                              //     ),
+                              //     BoxShadow(
+                              //       color: Colors.white,
+                              //       spreadRadius: -2,
+                              //       blurRadius: 4,
+                              //       offset: Offset(-1, -2),
+                              //     ),
+                              //   ],
+                              // ),
                               child: TextButton(
                                 onPressed: () {
                                   // Add your on pressed event here
@@ -242,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),
                                   ),
-                                  foregroundColor: const Color(0xFF555555),
+                                  foregroundColor: const Color(0xFF444444),
                                 ),
                                 child: Text('Enter',
                                     style: styles.subtitleTextStyle),
