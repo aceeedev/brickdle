@@ -175,23 +175,9 @@ class _HomePageState extends State<HomePage> {
                           )
                         : Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 height: styles.inputCardHeight,
                                 width: styles.cardWidth * 0.7,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Color(0x10000000),
-                                    ),
-                                    BoxShadow(
-                                      color: Colors.white,
-                                      spreadRadius: -2,
-                                      blurRadius: 4,
-                                      offset: Offset(-1, -2),
-                                    ),
-                                  ],
-                                ),
                                 child: TextFormField(
                                   controller: guessTextEditingController,
                                   inputFormatters: <TextInputFormatter>[
@@ -204,6 +190,7 @@ class _HomePageState extends State<HomePage> {
                                       : TextInputAction.done,
                                   textAlign: TextAlign.center,
                                   textAlignVertical: TextAlignVertical.center,
+                                  maxLines: 1,
                                   style: styles.numberTextStyle,
                                   cursorColor: Colors.black,
                                   decoration: InputDecoration(
@@ -214,28 +201,15 @@ class _HomePageState extends State<HomePage> {
                                     hintText: 'How many bricks?',
                                     hintStyle: styles.subtitleTextStyle,
                                     filled: true,
+                                    contentPadding: const EdgeInsets.all(10.0),
                                     fillColor: const Color(0x0D000000),
                                   ),
                                 ),
                               ),
                               SizedBox(width: styles.cardWidth * 0.02),
-                              Container(
+                              SizedBox(
                                 height: styles.inputCardHeight,
                                 width: styles.cardWidth * 0.28,
-                                // decoration: BoxDecoration(
-                                //   borderRadius: BorderRadius.circular(15),
-                                //   boxShadow: const [
-                                //     BoxShadow(
-                                //       color: Color(0x15000000),
-                                //     ),
-                                //     BoxShadow(
-                                //       color: Colors.white,
-                                //       spreadRadius: -2,
-                                //       blurRadius: 4,
-                                //       offset: Offset(-1, -2),
-                                //     ),
-                                //   ],
-                                // ),
                                 child: TextButton(
                                   onPressed: () => _submitGuess(
                                       guessTextEditingController.text),

@@ -9,7 +9,7 @@ class Styles {
       _titleFontSize = 36;
       _subtitleFontSize = 22;
       _numberFontSize = 28;
-      inputCardHeight = 60;
+      inputCardHeight = 55;
       buttonSize = 48;
     } else {
       _titleFontSize = 28;
