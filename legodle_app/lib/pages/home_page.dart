@@ -186,16 +186,8 @@ class _HomePageState extends State<HomePage> {
                                 inputFormatters: <TextInputFormatter>[
                                   FilteringTextInputFormatter.digitsOnly
                                 ],
-                                onFieldSubmitted: (value) {
-                                  final valueAsInt = int.tryParse(value);
-                                  if (valueAsInt != null && valueAsInt >= 1) {
-                                    context
-                                        .read<GameProvider>()
-                                        .addGuess(valueAsInt);
-
-                                    guessTextEditingController.clear();
-                                  }
-                                },
+                                onFieldSubmitted: (value) =>
+                                    _submitGuess(value),
                                 textInputAction: styles.isDesktop
                                     ? TextInputAction.none
                                     : TextInputAction.done,
@@ -233,9 +225,8 @@ class _HomePageState extends State<HomePage> {
                               //   ],
                               // ),
                               child: TextButton(
-                                onPressed: () {
-                                  // Add your on pressed event here
-                                },
+                                onPressed: () => _submitGuess(
+                                    guessTextEditingController.text),
                                 style: TextButton.styleFrom(
                                   side: const BorderSide(
                                       width: 2, color: Color(0x40000000)),
@@ -261,5 +252,15 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void _submitGuess(String guess) {
+    final valueAsInt = int.tryParse(guess);
+
+    if (valueAsInt != null && valueAsInt >= 1) {
+      context.read<GameProvider>().addGuess(valueAsInt);
+
+      guessTextEditingController.clear();
+    }
   }
 }
