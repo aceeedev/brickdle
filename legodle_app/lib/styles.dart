@@ -7,7 +7,7 @@ class Styles {
 
     if (isDesktop) {
       _titleFontSize = 36;
-      _subtitleFontSize = 24;
+      _subtitleFontSize = 22;
       _numberFontSize = 28;
       inputCardHeight = 60;
       buttonSize = 48;
