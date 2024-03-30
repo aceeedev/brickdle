@@ -149,12 +149,6 @@ class _HomePageState extends State<HomePage> {
                   textAlign: TextAlign.center,
                   softWrap: true,
                 ),
-              OutlinedButton(
-                onPressed: () {
-                  debugPrint('Received click');
-                },
-                child: const Text('Enter'),
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
@@ -168,35 +162,93 @@ class _HomePageState extends State<HomePage> {
                           textAlign: TextAlign.center,
                           softWrap: true,
                         )
-                      : TextFormField(
-                          controller: guessTextEditingController,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          onFieldSubmitted: (value) {
-                            final valueAsInt = int.tryParse(value);
-                            if (valueAsInt != null && valueAsInt >= 1) {
-                              context.read<GameProvider>().addGuess(valueAsInt);
+                      : Row(
+                          children: [
+                            Container(
+                              height: styles.inputCardHeight,
+                              width: styles.cardWidth * 0.7,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color(0x08000000),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.white,
+                                    spreadRadius: -3,
+                                    blurRadius: 5,
+                                    offset: Offset(-1, -2),
+                                  ),
+                                ],
+                              ),
+                              child: TextFormField(
+                                controller: guessTextEditingController,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                onFieldSubmitted: (value) {
+                                  final valueAsInt = int.tryParse(value);
+                                  if (valueAsInt != null && valueAsInt >= 1) {
+                                    context
+                                        .read<GameProvider>()
+                                        .addGuess(valueAsInt);
 
-                              guessTextEditingController.clear();
-                            }
-                          },
-                          textInputAction: styles.isDesktop
-                              ? TextInputAction.none
-                              : TextInputAction.done,
-                          textAlign: TextAlign.center,
-                          style: styles.numberTextStyle,
-                          cursorColor: Colors.black,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: BorderSide.none,
+                                    guessTextEditingController.clear();
+                                  }
+                                },
+                                textInputAction: styles.isDesktop
+                                    ? TextInputAction.none
+                                    : TextInputAction.done,
+                                textAlign: TextAlign.center,
+                                style: styles.numberTextStyle,
+                                cursorColor: Colors.black,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  hintText: 'How many bricks?',
+                                  hintStyle: styles.subtitleTextStyle,
+                                  filled: true,
+                                  fillColor: const Color(0x0D000000),
+                                ),
+                              ),
                             ),
-                            hintText: 'How many bricks?',
-                            hintStyle: styles.subtitleTextStyle,
-                            filled: true,
-                            fillColor: const Color(0x0D000000),
-                          ),
+                            SizedBox(width: styles.cardWidth * 0.02),
+                            Container(
+                              height: styles.inputCardHeight,
+                              width: styles.cardWidth * 0.28,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color(0x10000000),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.white,
+                                    spreadRadius: -3,
+                                    blurRadius: 5,
+                                    offset: Offset(-1, -2),
+                                  ),
+                                ],
+                              ),
+                              child: TextButton(
+                                onPressed: () {
+                                  // Add your on pressed event here
+                                },
+                                style: TextButton.styleFrom(
+                                  side: const BorderSide(
+                                      width: 2, color: Color(0x40000000)),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  foregroundColor: const Color(0xFF555555),
+                                ),
+                                child: Text('Enter',
+                                    style: styles.subtitleTextStyle),
+                              ),
+                            ),
+                          ],
                         ),
                 ),
               ),
