@@ -48,7 +48,7 @@ class HamburgerMenu extends StatelessWidget {
             context: context,
             title: 'Disclaimer',
             content: Text(
-              'LEGO, the LEGO logo, the Minifigure, and the Brick and Knob configurations are trademarks of the LEGO Group of Companies. ©2024 The LEGO Group.\n\nBrickdle and all content not covered by The LEGO Group\'s copyright is, unless otherwise stated, ©2024 Brickdle.',
+              'LEGO, the LEGO logo, the Minifigure, and the Brick and Knob configurations are trademarks of the LEGO Group of Companies. ©2024 The LEGO Group.\n\nBrickdle and all content not covered by The LEGO Group\'s copyright is, unless otherwise stated, ©2024 Brickdle.\n\nThis website utilizes Google Analytics solely for internal purposes to understand demographics and preferences. Google Analytics employs cookies to track interactions which are sent to and stored by Google servers. By using this website, you consent to the processing of data about you with the purposes and manner above. To opt-out of analytics tracking, you can install Google Analytics Opt-out Browser Add-on at "https://tools.google.com/dlpage/gaoptout."',
               style: styles.infoTextStyle,
             ),
           ),
