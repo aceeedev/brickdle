@@ -18,7 +18,18 @@ class LegoSet {
       required this.pieces,
       required this.price,
       required this.year}) {
-    imageUrl = 'https://images.brickset.com/sets/images/$number.jpg';
+    // imageUrl = 'https://images.brickset.com/sets/images/$number.jpg';
+    // url above broken with signiture
+    //     ══╡ EXCEPTION CAUGHT BY IMAGE RESOURCE SERVICE ╞════════════════════════════════════════════════════
+    //    The following Event object was thrown resolving an image frame:
+    //       [object Event]
+    //
+    //    When the exception was thrown, this was the stack
+    //
+    //    Image provider: NetworkImage("https://images.brickset.com/sets/images/xxxx.jpg", scale: 1.0)
+    //    Image key: NetworkImage("https://images.brickset.com/sets/images/xxxx.jpg", scale: 1.0)
+    // ════════════════════════════════════════════════════════════════════════════════════════════════════
+    imageUrl = 'https://img.bricklink.com/ItemImage/SL/$number.png';
   }
 
   factory LegoSet.fromList(List<dynamic> list) {
